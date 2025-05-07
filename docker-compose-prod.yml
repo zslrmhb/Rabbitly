@@ -1,0 +1,56 @@
+
+
+version: "3.9"
+
+services:
+  frontend:
+    build:
+      context: ./frontend
+      target: prod
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+    restart: always
+
+  backend-api:
+    build:
+      context: ./backend-api
+      target: prod
+    ports:
+      - "8000:8000"
+    environment:
+      - AI_SERVICE_URL=http://ai-service:9000
+      - CODE_RUNNER_URL=http://code-runner:9100
+      - QDRANT_URL=http://qdrant:6333
+    restart: always
+    depends_on:
+      - ai-service
+      - code-runner
+      - qdrant
+
+  ai-service:
+    build:
+      context: ./ai-service
+      target: prod
+    ports:
+      - "9000:9000"
+    environment:
+      - QDRANT_URL=http://qdrant:6333
+    restart: always
+    depends_on:
+      - qdrant
+
+  code-runner:
+    build:
+      context: ./code-runner
+      target: prod
+    ports:
+      - "9100:9100"
+    restart: always
+
+  qdrant:
+    image: qdrant/qdrant:v1.8.7
+    ports:
+      - "6333:6333"
+    restart: always

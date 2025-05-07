@@ -1,0 +1,48 @@
+version: "3.9"
+
+services:
+  frontend:
+    build:
+      context: ./frontend
+      target: dev
+    volumes:
+      - ./frontend:/app
+    ports:
+      - "5173:5173"
+    env_file:
+      - .env.example
+    depends_on:
+      - backend-api
+
+  backend-api:
+    build:
+      context: ./backend-api
+      target: dev
+    volumes:
+      - ./backend-api:/app
+    ports:
+      - "8000:8000"
+    environment:
+      - AI_SERVICE_URL=http://ai-service:9000
+      - CODE_RUNNER_URL=http://code-runner:9100
+    depends_on:
+      - ai-service
+      - code-runner
+
+  ai-service:
+    build:
+      context: ./ai-service
+      target: dev
+    volumes:
+      - ./ai-service:/app
+    ports:
+      - "9000:9000"
+
+  code-runner:
+    build:
+      context: ./code-runner
+      target: dev
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+      - "9100:9100"
