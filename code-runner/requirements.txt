@@ -1,0 +1,6 @@
+# Code Runner service dependencies
+fastapi>=0.95.0
+uvicorn[standard]>=0.22.0
+pydantic>=2.1.1
+docker>=6.0.0
+python-dotenv>=1.0.0

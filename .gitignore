@@ -1,0 +1,54 @@
+node_modules
+
+# Output
+.output
+.vercel
+.netlify
+.wrangler
+/.svelte-kit
+/build
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Env
+.env
+.env.*
+!.env.example
+!.env.test
+
+# Vite
+vite.config.js.timestamp-*
+vite.config.ts.timestamp-*
+
+# IDE / Editor directories
+.vscode/
+.idea/
+
+# Log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Additional build artefacts
+dist/
+coverage/
+.vite/
+.turbo/
+.cache/
+
+# Python artefacts
+__pycache__/
+*.py[cod]
+*.so
+.venv/
+env/
+python_env/
+*.egg-info/
+.mypy_cache/
+.pytest_cache/
+
+# Docker
+docker-compose.override.yml
