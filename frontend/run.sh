@@ -9,17 +9,10 @@ IMAGE="rabbitly-frontend:dev"
 PORT="5173"
 DOCKERFILE_DIR="$(dirname "$0")"
 
-# Detect platform and set appropriate Docker platform flag
-HOST_PLATFORM=$(uname -m)
-if [ "$HOST_PLATFORM" = "arm64" ] || [ "$HOST_PLATFORM" = "aarch64" ]; then
-  PLATFORM_FLAG="--platform linux/arm64"
-else
-  PLATFORM_FLAG="--platform linux/amd64"
-fi
 
 build () {
   echo "🔨  Building $IMAGE (dev target) for platform: $(uname -m)…"
-  DOCKER_CONFIG=/tmp/empty-config docker build $PLATFORM_FLAG --target dev -t "$IMAGE" "$DOCKERFILE_DIR"
+  DOCKER_CONFIG=/tmp/empty-config docker build  --target dev -t "$IMAGE" "$DOCKERFILE_DIR"
 }
 
 run_container () {
@@ -27,6 +20,7 @@ run_container () {
     $PLATFORM_FLAG \
     -p "${PORT}:${PORT}" \
     -v "${DOCKERFILE_DIR}":/app \
+    -v rabbitly_frontend_node_modules:/app/node_modules \
     --env-file "${DOCKERFILE_DIR}/../.env.example" \
     --name "${NAME}" \
     "$IMAGE"

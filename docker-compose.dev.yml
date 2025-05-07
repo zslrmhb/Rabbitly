@@ -1,29 +1,35 @@
 version: "3.9"
 
+volumes:
+  # Keeps Linux‑built node_modules between container restarts
+  frontend_node_modules:
+
 services:
+  # -------------  FRONTEND  (SvelteKit + Vite) -------------
   frontend:
-    container_name: frontend-dev 
+    container_name: frontend-dev                      # fixed, easy to exec
     build:
       context: ./frontend
-      target: dev
+      target: dev                                     # hot‑reload stage
+    # Bind source, BUT mask node_modules with a named volume
     volumes:
-      # mount everything *except* node_modules
       - ./frontend:/app
-      # keep container‑built node_modules in a named volume
       - frontend_node_modules:/app/node_modules
     ports:
       - "5173:5173"
     env_file:
       - .env.example
-    depends_on:
-      - backend-api
-    # tiny one‑shot container that just exits
+    # Omit depends_on so you can run the UI alone
+    restart: unless-stopped
+
+  # Populate the named volume once (runs & exits)
   frontend-init:
-    image: rabbitly-frontend:dev     # same image
+    image: rabbitly-frontend:dev                      # same dev image
     command: ["true"]
     volumes:
       - frontend_node_modules:/app/node_modules
 
+  # -------------  BACKEND GATEWAY  -------------------------
   backend-api:
     container_name: backend-api-dev
     build:
@@ -34,12 +40,14 @@ services:
     ports:
       - "8000:8000"
     environment:
-      - AI_SERVICE_URL=http://ai-service:9000
-      - CODE_RUNNER_URL=http://code-runner:9100
+      AI_SERVICE_URL: http://ai-service:9000
+      CODE_RUNNER_URL: http://code-runner:9100
     depends_on:
       - ai-service
       - code-runner
+    restart: unless-stopped
 
+  # -------------  AI SERVICE  ------------------------------
   ai-service:
     container_name: ai-service-dev
     build:
@@ -49,7 +57,9 @@ services:
       - ./ai-service:/app
     ports:
       - "9000:9000"
+    restart: unless-stopped
 
+  # -------------  CODE‑RUNNER  ------------------------------
   code-runner:
     container_name: code-runner-dev
     build:
@@ -59,6 +69,5 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
     ports:
       - "9100:9100"
-
-volumes:
-  frontend_node_modules:
+    privileged: true         # needed on some hosts for DinD‑style sandboxing
+    restart: unless-stopped
