@@ -7,6 +7,7 @@ volumes:
 services:
   # -------------  FRONTEND  (SvelteKit + Vite) -------------
   frontend:
+    image: rabbitly-frontend:dev 
     container_name: frontend-dev                      # fixed, easy to exec
     build:
       context: ./frontend
@@ -23,14 +24,19 @@ services:
     restart: unless-stopped
 
   # Populate the named volume once (runs & exits)
+    # docker-compose.dev.yml  (excerpt)
   frontend-init:
-    image: rabbitly-frontend:dev                      # same dev image
-    command: ["true"]
+    image: rabbitly-frontend:dev
+    build:
+      context: ./frontend
+      target: dev        # uses same dev stage
+    command: ["true"]    # exits immediately after seeding volume
     volumes:
       - frontend_node_modules:/app/node_modules
 
   # -------------  BACKEND GATEWAY  -------------------------
   backend-api:
+    image: rabbitly-backend-api:dev
     container_name: backend-api-dev
     build:
       context: ./backend-api
@@ -49,6 +55,7 @@ services:
 
   # -------------  AI SERVICE  ------------------------------
   ai-service:
+    image: rabbitly-ai-service:dev
     container_name: ai-service-dev
     build:
       context: ./ai-service
@@ -61,6 +68,7 @@ services:
 
   # -------------  CODE‑RUNNER  ------------------------------
   code-runner:
+    image: rabbitly-code-runner:dev
     container_name: code-runner-dev
     build:
       context: ./code-runner
