@@ -24,7 +24,8 @@ services:
     restart: unless-stopped
 
   # Populate the named volume once (runs & exits)
-    # docker-compose.dev.yml  (excerpt)
+  # docker-compose.dev.yml  (excerpt)
+  # THIS SOLVE THE FOLLOWING PROBLEM: docker copying binary files from MacOS to LINUX
   frontend-init:
     image: rabbitly-frontend:dev
     build:
