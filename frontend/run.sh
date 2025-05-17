@@ -17,7 +17,6 @@ build () {
 
 run_container () {
   docker run -d \
-    $PLATFORM_FLAG \
     -p "${PORT}:${PORT}" \
     -v "${DOCKERFILE_DIR}":/app \
     -v rabbitly_frontend_node_modules:/app/node_modules \
