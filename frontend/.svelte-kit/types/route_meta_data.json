@@ -1,26 +1,4 @@
 {
-	"/": [
-		"src/routes/+page.server.js",
-		"src/routes/+layout.js",
-		"src/routes/+layout.js"
-	],
-	"/courses": [
-		"src/routes/+layout.js"
-	],
-	"/courses/[course]/[section]": [
-		"src/routes/courses/[course]/[section]/+page.ts",
-		"src/routes/+layout.js"
-	],
-	"/demo": [
-		"src/routes/+layout.js"
-	],
-	"/demo/elements": [
-		"src/routes/+layout.js"
-	],
-	"/demo/fonts": [
-		"src/routes/+layout.js"
-	],
-	"/demo/ig-story": [
-		"src/routes/+layout.js"
-	]
+	"/": [],
+	"/demos/editor": []
 }
