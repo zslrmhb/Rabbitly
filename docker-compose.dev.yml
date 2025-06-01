@@ -65,6 +65,7 @@ services:
       target: dev
     volumes:
       - ./ai-service:/app
+      - .:/workspace
     ports:
       - "9000:9000"
     restart: unless-stopped
