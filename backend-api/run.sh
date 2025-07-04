@@ -7,7 +7,9 @@ set -euo pipefail
 NAME="backend-api-dev"
 IMAGE="rabbitly-backend:dev"
 PORT="8000"
-DOCKERFILE_DIR="$(dirname "$0")"
+# DOCKERFILE_DIR="$(dirname "$0")"
+DOCKERFILE_DIR="$(cd "$(dirname "$0")"; pwd -W)" # for windows
+
 
 build () {
   echo "🔨  Building $IMAGE (dev target)…"
