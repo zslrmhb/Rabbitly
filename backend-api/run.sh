@@ -10,6 +10,8 @@ PORT="8000"
 # DOCKERFILE_DIR="$(dirname "$0")"
 DOCKERFILE_DIR="$(cd "$(dirname "$0")"; pwd -W)" # for windows
 
+MYSQL_CONTAINER="rabbitly-mysql"
+COMPOSE_FILE="$DOCKERFILE_DIR/../docker-compose.dev.yml"
 
 build () {
   echo "🔨  Building $IMAGE (dev target)…"
@@ -17,8 +19,19 @@ build () {
   DOCKER_CONFIG=/tmp/empty-config docker build --target dev -t "$IMAGE" "$DOCKERFILE_DIR"
 }
 
+ensure_db_running () {
+  if ! docker ps --format '{{.Names}}' | grep -q "^${MYSQL_CONTAINER}$"; then
+    echo " MySQL container not running. Starting it now..."
+    docker-compose -f "$COMPOSE_FILE" up -d db
+  else
+    echo " MySQL container $MYSQL_CONTAINER is already running."
+  fi
+}
+
 run_container () {
+  ensure_db_running
   docker run -d \
+    --network rabbitly_default \
     -p "${PORT}:${PORT}" \
     -v "${DOCKERFILE_DIR}":/app \
     --env-file "${DOCKERFILE_DIR}/../.env.example" \
@@ -49,6 +62,7 @@ case "${1:-}" in
     run_container
     ;;
   start)
+    ensure_db_running
     docker start -a "$NAME"
     ;;
   stop)

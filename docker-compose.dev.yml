@@ -3,6 +3,7 @@ version: "3.9"
 volumes:
   # Keeps Linux‑built node_modules between container restarts
   frontend_node_modules:
+  mysql_data:
 
 services:
   # -------------  FRONTEND  (SvelteKit + Vite) -------------
@@ -51,9 +52,11 @@ services:
     environment:
       AI_SERVICE_URL: http://ai-service:9000
       CODE_RUNNER_URL: http://code-runner:9100
+      DATABASE_URL: mysql://rabbit:secret@db:3306/rabbitly_dev
     depends_on:
       - ai-service
       - code-runner
+      - db
     restart: unless-stopped
 
   # -------------  AI SERVICE  ------------------------------
@@ -82,4 +85,19 @@ services:
     ports:
       - "9100:9100"
     privileged: true         # needed on some hosts for DinD‑style sandboxing
+    restart: unless-stopped
+
+  # -------------  DataBase  ------------------------------
+  db:
+    image: mysql:8
+    container_name: rabbitly-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_DATABASE: rabbitly_dev
+      MYSQL_USER: rabbit
+      MYSQL_PASSWORD: secret
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
     restart: unless-stopped
