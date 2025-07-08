@@ -4,3 +4,7 @@ uvicorn[standard]>=0.22.0
 httpx>=0.24.0
 pydantic>=2.1.1
 python-dotenv>=1.0.0
+sqlalchemy
+bcrypt
+databases
+aiomysql
