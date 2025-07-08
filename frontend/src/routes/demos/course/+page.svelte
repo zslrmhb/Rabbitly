@@ -1,16 +1,23 @@
 <script lang="ts">
 	import MultipleChoice from '$components/course/MultipleChoice.svelte';
 	import MultipleChoiceM from '$components/course/MultipleChoiceM.svelte';
+	import ProgressBar from '$components/course/ProgressBar.svelte';
+
+	let progress = 0;
+
+	function handleCorrect() {
+		progress += 1/ 3;
+	}
 
 	const question1 = 'Which of the following member is gay?';
 	const choices1 = [
 		{ label: 'A', text: 'Andy' },
 		{ label: 'B', text: 'David' },
 		{ label: 'C', text: 'Hongbin' },
-        { label: 'D', text: 'Leon' },
-        { label: 'E', text: 'Luca' },
-        { label: 'F', text: 'Shiwei' },
-        { label: 'G', text: 'Zhen' }
+		{ label: 'D', text: 'Leon' },
+		{ label: 'E', text: 'Luca' },
+		{ label: 'F', text: 'Shiwei' },
+		{ label: 'G', text: 'Zhen' }
 	];
 	const answer1 = ['G'];
 
@@ -35,29 +42,40 @@
 	let showThird = false;
 </script>
 
-<!-- First question -->
-<MultipleChoice
-  question={question1}
-  choices={choices1}
-  correctAnswer={answer1}
-  on:correct={() => showSecond = true}
-/>
+<ProgressBar value={progress} />
 
-<!-- Second question -->
-{#if showSecond}
+<!-- Lesson Content -->
+<div class="main-content">
 	<MultipleChoice
-		question={question2}
-		choices={choices2}
-		correctAnswer={answer2}
-		on:correct={() => showThird = true}
+		question={question1}
+		choices={choices1}
+		correctAnswer={answer1}
+		on:correct={() => showSecond = true}
+		on:correct={handleCorrect}
 	/>
-{/if}
 
-<!-- Third question -->
-{#if showThird}
-	<MultipleChoiceM
-		question={question3}
-		choices={choices3}
-		correctAnswer={answer3}
-	/>
-{/if}
+	{#if showSecond}
+		<MultipleChoice
+			question={question2}
+			choices={choices2}
+			correctAnswer={answer2}
+			on:correct={() => showThird = true}
+			on:correct={handleCorrect}
+		/>
+	{/if}
+
+	{#if showThird}
+		<MultipleChoiceM
+			question={question3}
+			choices={choices3}
+			correctAnswer={answer3}
+			on:correct={handleCorrect}
+		/>
+	{/if}
+</div>
+
+<style>
+	.main-content {
+		padding-top: 2.5rem; /* space for fixed top progress bar */
+	}
+</style>

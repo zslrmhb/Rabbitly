@@ -1,5 +1,7 @@
 <script lang="ts">
 	import { createEventDispatcher } from 'svelte';
+	import { fade, slide } from 'svelte/transition';
+
 	export let question: string;
 	export let choices: { label: string; text: string }[];
 	export let correctAnswer: string[];
@@ -14,7 +16,6 @@
 		if (isCorrect) return;
 		selected = label;
 
-		// Reset if user changes choice after wrong submission
 		if (submitted && !isCorrect) {
 			submitted = false;
 		}
@@ -38,7 +39,7 @@
 			<div
 				class="choice
 					{selected === choice.label ? 'selected' : ''}
-					{submitted && !isCorrect && selected === choice.label ? 'incorrect' : ''}
+					{submitted && !isCorrect && selected === choice.label ? 'incorrect shake' : ''}
 					{submitted && isCorrect && selected === choice.label ? 'correct' : ''}"
 				on:click={() => handleClick(choice.label)}
 			>
@@ -50,8 +51,22 @@
 
 	{#if !isCorrect}
 		<button class="submit-btn" on:click={submitAnswer}>Submit</button>
-	{:else}
-		<p class="feedback"><strong>Correct!</strong></p>
+	{/if}
+
+	{#if submitted}
+		{#if isCorrect}
+			<div in:fade>
+				<p class="feedback correct-text" in:slide={{ duration: 300 }}>
+					<strong>Correct!</strong>
+				</p>
+			</div>
+		{:else}
+			<div in:fade>
+				<p class="feedback incorrect-text" in:slide={{ duration: 300 }}>
+					<strong>Try again.</strong>
+				</p>
+			</div>
+		{/if}
 	{/if}
 </div>
 
@@ -142,5 +157,36 @@
 		margin-top: 1rem;
 		font-weight: 600;
 		font-size: 1.1rem;
+	}
+
+	.correct-text {
+		color: #16a34a;
+	}
+
+	.incorrect-text {
+		color: #dc2626;
+	}
+
+	/* Shake animation for incorrect */
+	@keyframes shake {
+		0% {
+			transform: translateX(0);
+		}
+		25% {
+			transform: translateX(-5px);
+		}
+		50% {
+			transform: translateX(5px);
+		}
+		75% {
+			transform: translateX(-5px);
+		}
+		100% {
+			transform: translateX(0);
+		}
+	}
+
+	.shake {
+		animation: shake 0.3s ease-in-out;
 	}
 </style>

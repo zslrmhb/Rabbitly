@@ -1,5 +1,7 @@
 <script lang="ts">
 	import { createEventDispatcher } from 'svelte';
+	import { fade, slide } from 'svelte/transition';
+
 	export let question: string;
 	export let choices: { label: string; text: string }[];
 	export let correctAnswer: string[];
@@ -10,20 +12,19 @@
 	let isCorrect = false;
 
 	function toggle(label: string) {
-	if (isCorrect) return; // Don't allow changes after correct
+		if (isCorrect) return; // Don't allow changes after correct
 
-	if (selected.includes(label)) {
-		selected = selected.filter((l) => l !== label);
-	} else {
-		selected = [...selected, label];
+		if (selected.includes(label)) {
+			selected = selected.filter((l) => l !== label);
+		} else {
+			selected = [...selected, label];
+		}
+
+		// Clear submission state if user is trying again
+		if (submitted && !isCorrect) {
+			submitted = false;
+		}
 	}
-
-	// Clear submission state if user is trying again
-	if (submitted && !isCorrect) {
-		submitted = false;
-	}
-}
-
 
 	function submitAnswer() {
 		submitted = true;
@@ -59,10 +60,21 @@
 		{/each}
 	</div>
 
-	{#if !isCorrect}
+	{#if isCorrect}
+		<div in:fade>
+			<p class="feedback correct-text" in:slide={{ duration: 300 }}>
+				<strong>Correct!</strong>
+			</p>
+		</div>
+	{:else if submitted}
+		<div in:fade>
+			<p class="feedback incorrect-text" in:slide={{ duration: 300 }}>
+				<strong>Try again.</strong>
+			</p>
+		</div>
 		<button class="submit-btn" on:click={submitAnswer}>Submit</button>
 	{:else}
-		<p class="feedback"> <strong>Correct!</strong></p>
+		<button class="submit-btn" on:click={submitAnswer}>Submit</button>
 	{/if}
 </div>
 
@@ -168,5 +180,13 @@
 		margin-top: 1rem;
 		font-weight: 600;
 		font-size: 1.1rem;
+	}
+
+	.correct-text {
+		color: #16a34a;
+	}
+
+	.incorrect-text {
+		color: #dc2626;
 	}
 </style>
