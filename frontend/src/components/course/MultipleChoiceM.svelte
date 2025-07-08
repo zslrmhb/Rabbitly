@@ -5,25 +5,31 @@
 	export let correctAnswer: string[];
 
 	const dispatch = createEventDispatcher();
-
-	let selected: string = '';
+	let selected: string[] = [];
 	let submitted = false;
 	let isCorrect = false;
 
-	function handleClick(label: string) {
-		if (isCorrect) return;
-		selected = label;
+	function toggle(label: string) {
+	if (isCorrect) return; // Don't allow changes after correct
 
-		// Reset if user changes choice after wrong submission
-		if (submitted && !isCorrect) {
-			submitted = false;
-		}
+	if (selected.includes(label)) {
+		selected = selected.filter((l) => l !== label);
+	} else {
+		selected = [...selected, label];
 	}
 
+	// Clear submission state if user is trying again
+	if (submitted && !isCorrect) {
+		submitted = false;
+	}
+}
+
+
 	function submitAnswer() {
-		if (!selected) return;
 		submitted = true;
-		isCorrect = correctAnswer.includes(selected);
+		const selectedSorted = [...selected].sort();
+		const correctSorted = [...correctAnswer].sort();
+		isCorrect = JSON.stringify(selectedSorted) === JSON.stringify(correctSorted);
 		if (isCorrect) {
 			dispatch('correct');
 		}
@@ -37,11 +43,16 @@
 		{#each choices as choice}
 			<div
 				class="choice
-					{selected === choice.label ? 'selected' : ''}
-					{submitted && !isCorrect && selected === choice.label ? 'incorrect' : ''}
-					{submitted && isCorrect && selected === choice.label ? 'correct' : ''}"
-				on:click={() => handleClick(choice.label)}
+					{submitted && !isCorrect && selected.includes(choice.label) ? 'incorrect' : ''}
+					{submitted && isCorrect && selected.includes(choice.label) ? 'correct' : ''}
+					{selected.includes(choice.label) ? 'selected' : ''}"
+				on:click={() => toggle(choice.label)}
 			>
+				<div class="square">
+					{#if selected.includes(choice.label)}
+						<div class="filled-square"></div>
+					{/if}
+				</div>
 				<span class="label">{choice.label}.</span>
 				<span class="text">{choice.text}</span>
 			</div>
@@ -51,7 +62,7 @@
 	{#if !isCorrect}
 		<button class="submit-btn" on:click={submitAnswer}>Submit</button>
 	{:else}
-		<p class="feedback"><strong>Correct!</strong></p>
+		<p class="feedback"> <strong>Correct!</strong></p>
 	{/if}
 </div>
 
@@ -78,16 +89,14 @@
 
 	.choice {
 		display: flex;
-		align-items: flex-start;
-		gap: 0.5rem;
+		align-items: center;
+		gap: 0.75rem;
 		border: 2px solid #ccc;
 		border-radius: 12px;
-		padding: 1rem 1.25rem;
+		padding: 0.85rem 1rem;
 		cursor: pointer;
 		transition: all 0.2s ease;
-		font-size: 1rem;
 		background-color: #fff;
-		box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 	}
 
 	.choice:hover {
@@ -107,19 +116,36 @@
 		color: #222;
 	}
 
+	.square {
+		width: 20px;
+		height: 20px;
+		border: 2px solid #999;
+		border-radius: 4px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.filled-square {
+		width: 12px;
+		height: 12px;
+		background-color: #3b82f6;
+		border-radius: 2px;
+	}
+
 	.selected {
 		border-color: #3b82f6;
 		background-color: #e0f2fe;
 	}
 
 	.correct {
-		border-color: #22c55e !important;
-		background-color: #dcfce7 !important;
+		border-color: #22c55e;
+		background-color: #dcfce7;
 	}
 
 	.incorrect {
-		border-color: #ef4444 !important;
-		background-color: #fee2e2 !important;
+		border-color: #ef4444;
+		background-color: #fee2e2;
 	}
 
 	.submit-btn {

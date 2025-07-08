@@ -1,5 +1,6 @@
 <script lang="ts">
 	import MultipleChoice from '$components/course/MultipleChoice.svelte';
+	import MultipleChoiceM from '$components/course/MultipleChoiceM.svelte';
 
 	const question1 = 'Which of the following member is gay?';
 	const choices1 = [
@@ -21,13 +22,14 @@
 	];
 	const answer2 = ['B'];
 
-	const question3 = 'What is the capital of France?';
+	const question3 = 'Which of the following are prime numbers?';
 	const choices3 = [
-		{ label: 'A', text: 'Berlin' },
-		{ label: 'B', text: 'Madrid' },
-		{ label: 'C', text: 'Paris' }
+		{ label: 'A', text: '2' },
+		{ label: 'B', text: '3' },
+		{ label: 'C', text: '4' },
+		{ label: 'D', text: '5' }
 	];
-	const answer3 = ['C'];
+	const answer3 = ['A', 'B', 'D'];
 
 	let showSecond = false;
 	let showThird = false;
@@ -53,7 +55,7 @@
 
 <!-- Third question -->
 {#if showThird}
-	<MultipleChoice
+	<MultipleChoiceM
 		question={question3}
 		choices={choices3}
 		correctAnswer={answer3}
