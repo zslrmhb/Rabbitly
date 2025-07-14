@@ -1,6 +1,9 @@
 {
 	"/": [],
+	"/demos/components": [],
 	"/demos/course": [],
 	"/demos/editor": [],
+	"/demos/flexible-graph": [],
+	"/demos/graph": [],
 	"/demos/scrollytelling": []
 }
