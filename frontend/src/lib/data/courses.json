@@ -1,0 +1,248 @@
+[
+  {
+    "id": "react-foundations",
+    "title": "React Foundations",
+    "description": "Learn the basics of React, JSX, and state management.",
+    "difficulty": "beginner",
+    "estimatedTime": 120,
+    "tags": ["react", "javascript", "frontend"],
+    "subTopics": [
+      {
+        "id": "jsx-basics",
+        "title": "JSX & Rendering",
+        "description": "Learn the fundamentals of JSX and React rendering.",
+        "estimatedTime": 30,
+        "lessons": [
+          {
+            "id": "lesson-intro-jsx",
+            "title": "Intro to JSX",
+            "type": "text",
+            "content": "JSX is a syntax extension for JavaScript that allows you to write HTML-like code in your JavaScript files. It makes React components more readable and easier to write.",
+            "estimatedTime": 15
+          },
+          {
+            "id": "quiz-jsx",
+            "title": "JSX Quiz",
+            "type": "quiz",
+            "estimatedTime": 10,
+            "questions": [
+              {
+                "id": "q1",
+                "type": "multiple-choice",
+                "question": "What is JSX?",
+                "options": [
+                  "A JavaScript library",
+                  "A syntax extension for JavaScript",
+                  "A CSS framework",
+                  "A database system"
+                ],
+                "correctAnswer": "A syntax extension for JavaScript",
+                "explanation": "JSX is a syntax extension for JavaScript that allows you to write HTML-like code in your JavaScript files."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "state-management",
+        "title": "State Management",
+        "description": "Understand how to manage state in React applications.",
+        "estimatedTime": 45,
+        "lessons": [
+          {
+            "id": "lesson-state",
+            "title": "State in React",
+            "type": "text",
+            "content": "State in React is a way to store data that can change over time. When state changes, React re-renders the component to reflect the new data.",
+            "estimatedTime": 20
+          },
+          {
+            "id": "project-counter",
+            "title": "Build a Counter",
+            "type": "project",
+            "projectDescription": "Create a simple counter component that increments and decrements a number using React state.",
+            "estimatedTime": 25
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "python-intro",
+    "title": "Introduction to Python",
+    "description": "Start your Python journey with syntax, variables, and control flow.",
+    "difficulty": "beginner",
+    "estimatedTime": 90,
+    "tags": ["python", "programming", "basics"],
+    "subTopics": [
+      {
+        "id": "syntax-basics",
+        "title": "Syntax Basics",
+        "description": "Learn the fundamental syntax of Python programming.",
+        "estimatedTime": 30,
+        "lessons": [
+          {
+            "id": "lesson-hello",
+            "title": "Hello, Python!",
+            "type": "text",
+            "content": "Python is a high-level, interpreted programming language known for its simplicity and readability. Let's start with the basics.",
+            "estimatedTime": 15
+          },
+          {
+            "id": "quiz-syntax",
+            "title": "Syntax Quiz",
+            "type": "quiz",
+            "estimatedTime": 10,
+            "questions": [
+              {
+                "id": "q1",
+                "type": "multiple-choice",
+                "question": "How do you print 'Hello, World!' in Python?",
+                "options": [
+                  "console.log('Hello, World!')",
+                  "print('Hello, World!')",
+                  "echo 'Hello, World!'",
+                  "printf('Hello, World!')"
+                ],
+                "correctAnswer": "print('Hello, World!')",
+                "explanation": "In Python, you use the print() function to output text to the console."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "control-flow",
+        "title": "Control Flow",
+        "description": "Master conditional statements and loops in Python.",
+        "estimatedTime": 40,
+        "lessons": [
+          {
+            "id": "lesson-if",
+            "title": "If Statements",
+            "type": "text",
+            "content": "Conditional statements allow your program to make decisions based on certain conditions. In Python, you use if, elif, and else statements.",
+            "estimatedTime": 20
+          },
+          {
+            "id": "project-guess",
+            "title": "Guessing Game",
+            "type": "project",
+            "projectDescription": "Create a simple number guessing game using if statements and loops.",
+            "estimatedTime": 20
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "data-science-intro",
+    "title": "Introduction to Data Science",
+    "description": "Learn the fundamentals of data science, from basic statistics to machine learning",
+    "difficulty": "intermediate",
+    "estimatedTime": 300,
+    "tags": ["data-science", "statistics", "machine-learning"],
+    "subTopics": [
+      {
+        "id": "getting-started",
+        "title": "Getting Started",
+        "description": "Begin your data science journey with an overview of the field and essential tools.",
+        "estimatedTime": 45,
+        "lessons": [
+          {
+            "id": "lesson-welcome",
+            "title": "Welcome to Data Science",
+            "type": "text",
+            "content": "Data science is an interdisciplinary field that uses scientific methods, processes, algorithms, and systems to extract knowledge and insights from structured and unstructured data.",
+            "estimatedTime": 20
+          },
+          {
+            "id": "quiz-intro",
+            "title": "Introduction Quiz",
+            "type": "quiz",
+            "estimatedTime": 15,
+            "questions": [
+              {
+                "id": "q1",
+                "type": "multiple-choice",
+                "question": "What is the main goal of data science?",
+                "options": [
+                  "To create beautiful visualizations",
+                  "To extract knowledge and insights from data",
+                  "To write complex algorithms",
+                  "To store large amounts of data"
+                ],
+                "correctAnswer": "To extract knowledge and insights from data",
+                "explanation": "Data science focuses on extracting meaningful insights and knowledge from data to inform decision-making."
+              }
+            ]
+          },
+          {
+            "id": "project-setup",
+            "title": "Environment Setup",
+            "type": "project",
+            "projectDescription": "Set up your data science environment with Python, Jupyter notebooks, and essential libraries like pandas and numpy.",
+            "estimatedTime": 30
+          }
+        ]
+      },
+      {
+        "id": "data-fundamentals",
+        "title": "Data Fundamentals",
+        "description": "Learn about different data types, collection methods, and basic data operations.",
+        "estimatedTime": 60,
+        "lessons": [
+          {
+            "id": "lesson-data-types",
+            "title": "Data Types and Variables",
+            "type": "text",
+            "content": "Understanding different data types is crucial for data analysis. We'll explore numerical, categorical, and text data types.",
+            "estimatedTime": 25
+          },
+          {
+            "id": "lesson-data-collection",
+            "title": "Data Collection Methods",
+            "type": "text",
+            "content": "Learn about various methods for collecting data, including surveys, APIs, web scraping, and existing datasets.",
+            "estimatedTime": 20
+          },
+          {
+            "id": "quiz-fundamentals",
+            "title": "Data Fundamentals Quiz",
+            "type": "quiz",
+            "estimatedTime": 15,
+            "questions": [
+              {
+                "id": "q1",
+                "type": "multiple-choice",
+                "question": "Which of the following is a categorical data type?",
+                "options": [
+                  "Age",
+                  "Height",
+                  "Gender",
+                  "Temperature"
+                ],
+                "correctAnswer": "Gender",
+                "explanation": "Gender is categorical data as it represents distinct categories rather than numerical values."
+              }
+            ]
+          },
+          {
+            "id": "project-data-exploration",
+            "title": "Data Exploration Project",
+            "type": "project",
+            "projectDescription": "Explore a real dataset using pandas, examining data types, missing values, and basic statistics.",
+            "estimatedTime": 30
+          },
+          {
+            "id": "lesson-data-cleaning",
+            "title": "Data Cleaning Basics",
+            "type": "text",
+            "content": "Data cleaning is a crucial step in data science. Learn techniques for handling missing values, outliers, and inconsistent data.",
+            "estimatedTime": 25
+          }
+        ]
+      }
+    ]
+  }
+] 

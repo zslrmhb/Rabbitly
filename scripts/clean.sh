@@ -10,7 +10,7 @@ echo "🧹  Pruning dangling images & build cache…"
 docker image prune -f
 docker builder prune -f
 
-echo "🗑️   Removing stopped containers without names (if any)…"
-docker container prune -f
+# echo "🗑️   Removing stopped containers without names (if any)…"
+# docker container prune -f
 
 echo "✅  Docker workspace is tidy."

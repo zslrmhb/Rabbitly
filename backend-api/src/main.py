@@ -5,6 +5,7 @@ from src.routers import chat, execute, content
 
 app = FastAPI()
 
+<<<<<<< HEAD
 # CORS (adjust origin if needed for frontend)
 app.add_middleware(
     CORSMiddleware,
@@ -22,3 +23,9 @@ app.include_router(content.router, prefix="/content", tags=["Content"])
 @app.get("/health")
 async def health():
     return {"status": "ok","message": "Hello World"}
+=======
+
+@app.get("/health")
+async def health():
+    return {"status": "ok"}
+>>>>>>> CYL

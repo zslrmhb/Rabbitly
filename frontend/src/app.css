@@ -1,1 +1,15 @@
-@import 'tailwindcss';
+/* Write your global styles here, in PostCSS syntax */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+	--accent: #B78AF0;
+	--accent-purple: #b78af0;  /* Sub-topic A */
+	--accent-green:  #46cb2f;  /* Sub-topic B */
+}
+
+@import "tailwindcss";
+@plugin "daisyui" {
+  themes: light --default;
+}

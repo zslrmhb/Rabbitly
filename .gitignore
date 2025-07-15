@@ -49,6 +49,7 @@ python_env/
 *.egg-info/
 .mypy_cache/
 .pytest_cache/
+.ruff_cache
 
 # Docker
 docker-compose.override.yml

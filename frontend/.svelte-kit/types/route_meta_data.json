@@ -1,3 +1,26 @@
 {
-	"/": []
+	"/": [],
+	"/courses": [],
+	"/courses/[slug]": [],
+	"/course/[id]": [
+		"src/routes/course/[id]/+page.ts"
+	],
+	"/demos/data-science-path": [],
+	"/demos/data-science-path/components/achievement": [],
+	"/demos/data-science-path/components/data-cleaning": [],
+	"/demos/data-science-path/components/data-collection": [],
+	"/demos/data-science-path/components/data-exploration": [],
+	"/demos/data-science-path/components/data-types": [],
+	"/demos/data-science-path/components/fundamentals-quiz": [],
+	"/demos/data-science-path/components/intro-quiz": [],
+	"/demos/data-science-path/components/milestone": [],
+	"/demos/data-science-path/components/setup": [],
+	"/demos/data-science-path/components/welcome": [],
+	"/demos/learning-path": [
+		"src/routes/demos/learning-path/+page.ts"
+	],
+	"/demos/learning-path/components/code-1": [],
+	"/demos/learning-path/components/mcq-1": [],
+	"/demos/learning-path/components/text-1": [],
+	"/room/[id]": []
 }
