@@ -55,7 +55,6 @@
 </script>
 
 <div class="path-rail">
-  <div class="rail"></div>
   <div class="nodes">
     {#each nodes as node, i}
       {#if dividerTitles[node.subTopicId] && (i === 0 || nodes[i-1].subTopicId !== node.subTopicId)}
@@ -65,7 +64,7 @@
           <span class="divider-line"></span>
         </div>
       {/if}
-      <div class="node-wrap">
+      <div class="node-wrap {i % 2 === 0 ? 'zig-left' : 'zig-right'}">
         <button
           class="node {node.state} {node.special || ''}"
           style="
@@ -90,104 +89,118 @@
 </div>
 
 <style>
+.path-rail {
+  position: relative;
+  width: 180px;
+  margin-left: 10%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-top: 32px;
+}
+.nodes {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 48px;
+}
+.node-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  transition: transform 0.2s;
+}
+.zig-left {
+  align-self: flex-start;
+  transform: translateX(0);
+}
+.zig-right {
+  align-self: flex-end;
+  transform: translateX(40px);
+}
+.node {
+  border-radius: 50%;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  color: #fff;
+  transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
+  cursor: pointer;
+  outline: none;
+  box-shadow: 0 2px 4px rgba(0,0,0,.12);
+  background: var(--accent, #B78AF0);
+}
+.node:hover:not(:disabled):not(.locked) {
+  background: #a06be0;
+  transform: scale(1.07);
+}
+.node.current {
+  z-index: 2;
+  font-size: 2.2rem;
+  border: 2px solid #fff;
+  outline: none;
+}
+.node.completed {
+  filter: none;
+}
+.node.future {
+  filter: grayscale(0.2);
+  color: #fff;
+}
+.node.locked {
+  cursor: not-allowed;
+  filter: grayscale(0.5);
+  color: #fff;
+}
+.node.chest, .node.badge {
+  background: #FFD700 !important;
+  color: #fff;
+}
+.icon {
+  pointer-events: none;
+  user-select: none;
+}
+.node-label {
+  margin-top: 8px;
+  font-size: 13px;
+  color: #444;
+  text-align: center;
+  max-width: 90px;
+  font-weight: 500;
+}
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 24px 0 8px 0;
+  width: 100%;
+}
+.divider-line {
+  flex: 1;
+  height: 1px;
+  background: #bbb;
+  opacity: 0.5;
+}
+.divider-title {
+  font-size: 13px;
+  color: #888;
+  font-weight: 600;
+  background: #fff;
+  padding: 0 8px;
+  border-radius: 8px;
+}
+@media (max-width: 768px) {
   .path-rail {
-    position: relative;
     width: 120px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-top: 32px;
+    margin-left: 0;
   }
-  .rail {
-    position: absolute;
-    left: 50%;
-    top: 0;
-    bottom: 0;
-    width: 2px;
-    background: #2223 40%;
-    transform: translateX(-50%);
-    z-index: 0;
+  .zig-right {
+    transform: translateX(20px);
   }
-  .nodes {
-    position: relative;
-    z-index: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 48px;
-  }
-  .node-wrap {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    position: relative;
-  }
-  .node {
-    border-radius: 50%;
-    border: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 2rem;
-    color: #fff;
-    transition: box-shadow 0.2s, transform 0.2s;
-    cursor: pointer;
-    outline: none;
-    box-shadow: 0 2px 4px rgba(0,0,0,.4);
-  }
-  .node.current {
-    z-index: 2;
-    font-size: 2.2rem;
-    border: 2px solid #fff;
-    outline: none;
-  }
-  .node.completed {
-    filter: none;
-  }
-  .node.future {
-    filter: grayscale(0.2);
-    color: #fff;
-  }
-  .node.locked {
-    cursor: not-allowed;
-    filter: grayscale(0.5);
-    color: #fff;
-  }
-  .node.chest, .node.badge {
-    background: #FFD700 !important;
-    color: #fff;
-  }
-  .icon {
-    pointer-events: none;
-    user-select: none;
-  }
-  .node-label {
-    margin-top: 8px;
-    font-size: 13px;
-    color: #444;
-    text-align: center;
-    max-width: 90px;
-    font-weight: 500;
-  }
-  .divider {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin: 24px 0 8px 0;
-    width: 100%;
-  }
-  .divider-line {
-    flex: 1;
-    height: 1px;
-    background: #bbb;
-    opacity: 0.5;
-  }
-  .divider-title {
-    font-size: 13px;
-    color: #888;
-    font-weight: 600;
-    background: #fff;
-    padding: 0 8px;
-    border-radius: 8px;
-  }
+}
 </style> 

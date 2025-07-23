@@ -18,36 +18,28 @@ export const nodes = [
 	() => import('./nodes/14'),
 	() => import('./nodes/15'),
 	() => import('./nodes/16'),
-	() => import('./nodes/17'),
-	() => import('./nodes/18'),
-	() => import('./nodes/19'),
-	() => import('./nodes/20'),
-	() => import('./nodes/21')
+	() => import('./nodes/17')
 ];
 
 export const server_loads = [];
 
 export const dictionary = {
 		"/": [2],
-		"/courses": [4],
-		"/courses/[slug]": [5],
-		"/course/[id]": [3],
-		"/demos/data-science-path": [6],
-		"/demos/data-science-path/components/achievement": [7],
-		"/demos/data-science-path/components/data-cleaning": [8],
-		"/demos/data-science-path/components/data-collection": [9],
-		"/demos/data-science-path/components/data-exploration": [10],
-		"/demos/data-science-path/components/data-types": [11],
-		"/demos/data-science-path/components/fundamentals-quiz": [12],
-		"/demos/data-science-path/components/intro-quiz": [13],
-		"/demos/data-science-path/components/milestone": [14],
-		"/demos/data-science-path/components/setup": [15],
-		"/demos/data-science-path/components/welcome": [16],
-		"/demos/learning-path": [17],
-		"/demos/learning-path/components/code-1": [18],
-		"/demos/learning-path/components/mcq-1": [19],
-		"/demos/learning-path/components/text-1": [20],
-		"/room/[id]": [21]
+		"/courses/[slug]": [3],
+		"/demos/component-library": [4],
+		"/demos/data-science-path": [5],
+		"/demos/data-science-path/components/achievement": [6],
+		"/demos/data-science-path/components/data-cleaning": [7],
+		"/demos/data-science-path/components/data-collection": [8],
+		"/demos/data-science-path/components/data-exploration": [9],
+		"/demos/data-science-path/components/data-types": [10],
+		"/demos/data-science-path/components/fundamentals-quiz": [11],
+		"/demos/data-science-path/components/intro-quiz": [12],
+		"/demos/data-science-path/components/milestone": [13],
+		"/demos/data-science-path/components/setup": [14],
+		"/demos/data-science-path/components/welcome": [15],
+		"/demos/data-science-path/example-course-lobby": [16],
+		"/room/[id]": [17]
 	};
 
 export const hooks = {
