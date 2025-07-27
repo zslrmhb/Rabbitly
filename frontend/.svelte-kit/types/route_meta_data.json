@@ -1,18 +1,6 @@
 {
 	"/": [],
-	"/courses/[slug]": [],
-	"/demos/component-library": [],
-	"/demos/data-science-path": [],
-	"/demos/data-science-path/components/achievement": [],
-	"/demos/data-science-path/components/data-cleaning": [],
-	"/demos/data-science-path/components/data-collection": [],
-	"/demos/data-science-path/components/data-exploration": [],
-	"/demos/data-science-path/components/data-types": [],
-	"/demos/data-science-path/components/fundamentals-quiz": [],
-	"/demos/data-science-path/components/intro-quiz": [],
-	"/demos/data-science-path/components/milestone": [],
-	"/demos/data-science-path/components/setup": [],
-	"/demos/data-science-path/components/welcome": [],
-	"/demos/data-science-path/example-course-lobby": [],
-	"/room/[id]": []
+	"/demos/editor": [],
+	"/demos/scrollytelling": [],
+	"/signup": []
 }
